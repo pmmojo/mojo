@@ -1,0 +1,9 @@
+<div *ngIf="user$|async">
+<left-nav></left-nav>
+<a href='#' (click)="onLogout()">Logout</a>
+</div>
+
+
+<div id="page-wrapper">
+    <router-outlet></router-outlet>    
+  </div>
