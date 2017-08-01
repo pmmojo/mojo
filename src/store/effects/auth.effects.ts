@@ -8,16 +8,15 @@ import { of } from 'rxjs/observable/of';
 import * as AuthActions from '../actions/auth.actions'
 import { AuthService } from "../../auth/shared/services/auth/auth.service";
 import { Router } from "@angular/router";
-import * as ProjectsActions from "../../store/actions/projects.actions";
-import { ProjectsService } from "../../projects/services/projects.service";
+//import * as ProjectsActions from "../../store/actions/projects.actions";
+//import { ProjectsService } from "../../projects/services/projects.service";
 
 @Injectable()
 export class AuthEffects {
     constructor(
         private actions$: Actions,
         private authService: AuthService,
-        private router: Router,
-        private projectService: ProjectsService
+        private router: Router
     ) { }
 
     @Effect() login$: Observable<Action> = this.actions$
@@ -29,19 +28,20 @@ export class AuthEffects {
                 .then(data => new AuthActions.LoginSuccess())
                 .catch(() => of(new AuthActions.LoginFailed()))
         );
-
-        //th
-        //{ dispatch: false }is.router.navigate(['/login'])
-    @Effect() loginSuccess$: Observable<Action> = this.actions$
+        
+    @Effect({ dispatch: false }) loginSuccess$: Observable<Action> = this.actions$
         .ofType(AuthActions.LOGIN_SUCCESS)       
-        .mergeMap(payload =>
-            Observable.of(new ProjectsActions.GetAllProjects())
-            //todo would like to move this out of here...
-
-            // this.projectService.getAllProjects()
-            //     .map(data => new ProjectsActions.GetAllProjectsSuccess(data))
-            //     .catch(() => of(new ProjectsActions.GetProjectFailed()))
+        .do(() =>
+            this.router.navigate(['/'])
         );
+        // .mergeMap(payload =>
+        //     Observable.of(new ProjectsActions.GetAllProjects())
+        //     //todo would like to move this out of here...
+
+        //     // this.projectService.getAllProjects()
+        //     //     .map(data => new ProjectsActions.GetAllProjectsSuccess(data))
+        //     //     .catch(() => of(new ProjectsActions.GetProjectFailed()))
+        // );
         
 
     @Effect() logout$: Observable<Action> = this.actions$
@@ -64,8 +64,7 @@ export class AuthEffects {
         .mergeMap(payload =>
             this.authService.createUser(payload.email, payload.password)
                 .then(data => {
-                    new AuthActions.RegisterSuccess();
-                    new ProjectsActions.GetAllProjects();
+                    new AuthActions.RegisterSuccess();                    
                 })
                 .catch(() => of(new AuthActions.RegisterFailed()))
         );

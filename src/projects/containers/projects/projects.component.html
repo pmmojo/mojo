@@ -1,0 +1,27 @@
+<div class="meals">
+    <div class="meals__title">
+        <h1>
+            <img src="/images/food.svg"> Your Projects
+        </h1>
+        <a class="btn__add" [routerLink]="['../meals/new']">
+          <img src="/images/add-white.svg">
+          New Project
+        </a>
+    </div>
+
+    <div *ngIf="allProjects$ | async as projects; else loading;">
+        <div class="message" *ngIf="!projects.length">
+            <img src="/img/face.svg"> No projects, add a new project to start
+        </div>
+
+        <list-item *ngFor="let project of projects" [item]="project" 
+            [index]="i" (remove)="removeMeal($event)" [url]="'project'">
+        </list-item>
+    </div>
+
+    <ng-template #loading>
+        <div class="message">
+            <img src="/images/loading.svg"> Fetching projects...
+        </div>
+    </ng-template>    
+</div>

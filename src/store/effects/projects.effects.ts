@@ -17,22 +17,22 @@ export class ProjectsEffects {
 
     @Effect() getAllProject$: Observable<Action> = this.actions$
         .ofType(ProjectsActions.GET_ALL_PROJECTS)
-        .map(toPayload)
-        .do(()=> console.log('stuff'))
+        .map(toPayload)        
         .mergeMap(payload =>
             this.projectService.getAllProjects()
                 .map(data => new ProjectsActions.GetAllProjectsSuccess(data))
                 .catch(() => of(new ProjectsActions.GetAllProjectsFailed()))
         );
 
-        // @Effect() getProject$: Observable<Action> = this.actions$
-        // .ofType(ProjectsActions.GET_PROJECT)
-        // .map(toPayload)
-        // .mergeMap(payload =>
-        //     this.projectService.getProject(payload.id)
-        //         .map(data => new ProjectsActions.GetProjectSuccess(data))
-        //         .catch(() => of(new ProjectsActions.GetProjectFailed()))
-        // );
+        @Effect() getProject$: Observable<Action> = this.actions$
+        .ofType(ProjectsActions.GET_PROJECT)
+        //.do(()=> console.log('ProjectsActions.GET_PROJECT'))
+        .map(toPayload)
+        .mergeMap(payload =>
+            this.projectService.getProject(payload)
+                .map(data => new ProjectsActions.GetProjectSuccess(data))
+                .catch((error) => of(new ProjectsActions.GetProjectFailed(error)))
+        );
 
         @Effect() saveProject$: Observable<Action> = this.actions$
         .ofType(ProjectsActions.SAVE_PROJECT)

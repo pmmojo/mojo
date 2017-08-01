@@ -14,10 +14,10 @@ const initialState: State = {
 };
 
 export function reducer(state = initialState, action: Action): State {
-    console.log('calling project reducer with action',action)    ;
+    //console.log('calling project reducer with action',action)    ;
     switch (action.type) {
         case ProjectsActions.GET_PROJECT_SUCCESS: {                        
-            console.log('success GET_PROJECT_SUCCESS reducer fired', action.payload);
+          //  console.log('success GET_PROJECT_SUCCESS reducer fired', action.payload);
             return Object.assign({}, state, {
                 selectedProject: action.payload
             });

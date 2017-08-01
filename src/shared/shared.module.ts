@@ -1,5 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ListItemComponent } from "./components/list-item/list-item.component";
 //import { ReactiveFormsModule } from '@angular/forms';
 
 // components
@@ -10,13 +12,14 @@ import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   declarations: [
-    //AuthFormComponent
+    ListItemComponent
   ],
   exports: [
-    //AuthFormComponent
+    ListItemComponent
   ]
 })
 export class SharedModule {

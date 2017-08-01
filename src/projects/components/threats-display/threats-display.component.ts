@@ -5,7 +5,7 @@ import { Threat } from "../../../threats/models/threat.interface";
     selector: 'threats-display',
     template: `   
        the list           
-       <table>
+       <table id="table" class="table table-hover table-mc-light-blue">
        <tr>
             <th>
                     Threat
@@ -16,7 +16,16 @@ import { Threat } from "../../../threats/models/threat.interface";
             <th>
                     Probability
             </th>
+            <th>
+                    Impact x Prob
+
+            </th>
+            <th>
+                    Cumulative level of success
+
+            </th>
        </tr>
+       <tbody>
        <tr *ngFor="let threat of threats; let i = index">
             <td>
                 {{threat.title}}
@@ -27,7 +36,14 @@ import { Threat } from "../../../threats/models/threat.interface";
             <td>
                 {{threat.probability}}
             </td>
+            <td>
+                {{threat.probability}}
+            </td>
+            <td>
+                {{threat.probability}}
+            </td>
        </tr>
+       </tbody>
        </table>
   `
 })

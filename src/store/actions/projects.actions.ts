@@ -20,8 +20,8 @@ export const SET_PROJECTS_FAIL = '[Projects] Set Projects Fail';
 
 export class GetProject implements Action {
     readonly type = GET_PROJECT;
-    constructor(public payload: number) {
-       // console.log('get project fired action',payload);
+    constructor(public payload: string) {
+        console.log('get project fired action',payload);
     }
 }
 
@@ -34,8 +34,8 @@ export class GetProjectSuccess implements Action {
 
 export class GetProjectFailed implements Action {
     readonly type = GET_PROJECT_FAIL;
-    constructor() {
-       // console.log('BOOM ERROR get project');
+    constructor(error) {
+       // console.log('BOOM ERROR get project', error);
     }
 }
 
@@ -50,7 +50,7 @@ export class GetAllProjects implements Action {
 export class GetAllProjectsSuccess implements Action {
     readonly type = GET_ALL_PROJECTS_SUCCESS;
     constructor(public payload: Project[]) {
-        console.log('success GET_ALL_PROJECTS_SUCCESS fired action', payload);
+     //   console.log('success GET_ALL_PROJECTS_SUCCESS fired action', payload);
     }
 }
 

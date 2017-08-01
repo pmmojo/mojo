@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 
 import { Store } from "@ngrx/store";
-import * as fromRoot from '../../store';
-import * as projectActions from "../../store/actions/projects.actions";
+import * as fromRoot from '../../../store';
+import * as projectActions from "../../../store/actions/projects.actions";
 
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/switchMap';
 
-import { Project } from "../models/project.interface";
+import { Project } from "../../models/project.interface";
 
 //         <div formArrayName="threats">        
 //             <label *ngFor="let c of threats.controls; index as i;">
@@ -22,7 +22,7 @@ import { Project } from "../models/project.interface";
 // </div>
 
 @Component({
-  templateUrl: 'project.component.html'
+  templateUrl: 'projects.component.html'
 })
 export class ProjectsComponent implements OnInit {
   project$: Observable<Project>;
@@ -52,7 +52,9 @@ export class ProjectsComponent implements OnInit {
    
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.store.dispatch(new projectActions.GetAllProjects());
+
     //todo only get project if we have an id
     this.project$ = this.store.select(fromRoot.getSelectedProject);
 

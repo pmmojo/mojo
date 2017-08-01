@@ -3,11 +3,15 @@
 <app-nav *ngIf="(user$ | async)?.authenticated">
 </app-nav>
 
-<pre>{{user$|async|json}}</pre>
+<!-- <div *ngIf="user$|async as user">
+    Hello {{user.email}}
+</div> -->
+
+<!-- <pre>{{user$|async|json}}</pre> -->
 
 <div *ngIf="user$|async">
   <left-nav></left-nav>
-  <a href='#' (click)="onLogout()">Logout</a>
+  
 </div>
 
 <div id="wrapper">

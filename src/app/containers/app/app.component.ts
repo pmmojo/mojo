@@ -24,7 +24,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.subscription = this.authService.auth$.subscribe();
-    this.user$ = this.store.select<User>(fromRoot.getAuthenticatedUsed);    
+    this.user$ = this.store.select<User>(fromRoot.getAuthenticatedUsed);        
   }
 
   ngOnDestroy() {
