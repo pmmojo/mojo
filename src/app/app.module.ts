@@ -8,28 +8,30 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 
-import * as Reducers from "./store";
+import * as Reducers from "../store";
 //import { ProjectsEffects } from "./store/effects/projects.effects";
 
 //containers
 import { AppComponent } from './containers/app/app.component';
 
 //feature modules
-import { NavigationModule } from "./navigation/navigation.module";
-import { DashboardModule } from "./dashboard/dashboard.module";
-import { ThreatsModule } from "./threats/threats.module";
-import { ProjectsModule } from "./projects/projects.module";
-import { ProjectGroupsModule } from "./project-groups/project-groups.module";
+import { NavigationModule } from "../navigation/navigation.module";
+import { DashboardModule } from "../dashboard/dashboard.module";
+import { ThreatsModule } from "../threats/threats.module";
+import { ProjectsModule } from "../projects/projects.module";
+import { ProjectGroupsModule } from "../project-groups/project-groups.module";
 
 //components to be removed once routing in indiv modules
-import { DashboardComponent } from "./dashboard/containers/dashboard.component";
-import { ThreatsComponent } from "./threats/containers/threats.component";
-import { ProjectsComponent } from "./projects/containers/projects.component";
-import { ProjectGroupsComponent } from "./project-groups/containers/project-groups.component";
-import { ProjectsService } from "./projects/services/projects.service";
-import { AuthModule } from "./auth/auth.module";
-import { SharedModule } from "./shared/shared.module";
-import { AuthGuard } from "./auth/shared/guards/auth.guard";
+import { DashboardComponent } from "../dashboard/containers/dashboard/dashboard.component";
+import { ThreatsComponent } from "../threats/containers/threats.component";
+import { ProjectsComponent } from "../projects/containers/projects.component";
+import { ProjectGroupsComponent } from "../project-groups/containers/project-groups.component";
+import { ProjectsService } from "../projects/services/projects.service";
+import { AuthModule } from "../auth/auth.module";
+import { SharedModule } from "../shared/shared.module";
+import { AuthGuard } from "../auth/shared/guards/auth.guard";
+import { AppNavComponent } from "./components/app-nav/app-nav.component";
+import { AppHeaderComponent } from "./components/app-header/app-header.component";
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent , canActivate: [AuthGuard] },
@@ -45,6 +47,9 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent
+    ,  
+     AppHeaderComponent,
+    AppNavComponent
   ],
   imports: [
     BrowserModule,
@@ -56,12 +61,12 @@ ReactiveFormsModule,
 SharedModule,
 
     //feature modules
+    AuthModule,
     NavigationModule,
     DashboardModule,
     ThreatsModule,
     ProjectsModule,
-    ProjectGroupsModule,
-    AuthModule
+    ProjectGroupsModule  
   ],
   providers: [],
   bootstrap: [AppComponent]
