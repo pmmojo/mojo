@@ -10,43 +10,25 @@ import 'rxjs/add/operator/switchMap';
 
 import { Project } from "../../models/project.interface";
 import { ActivatedRoute, Router } from "@angular/router";
+import { Threat } from "../../../threats/models/threat.interface";
 
 @Component({
   templateUrl: 'project.component.html'
 })
 export class ProjectComponent implements OnInit {
-  project$: Observable<Project>;
+  project: Project;
+  //project$: Observable<Project>;
   allProjects$: Observable<Project[]>;
 
-view: any[] = [700, 400];
+  view: any[] = [700, 400];
 
-  results:any[];
-  
+  results: any[];
+
   constructor(private store: Store<fromRoot.State>,
     private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute) { }
 
-  // form = this.fb.group({
-  //   title: ['', Validators.required],
-  //   threats: this.fb.array([])    
-  // });
-
-  // get threats() {
-  //   return this.form.get('threats') as FormArray;
-  // }
-
-  // get newThreat() {
-  //   return this.form.get('threat') as FormGroup;
-  // }
-
-  // addThreat(event:FormGroup) {
-  //   this.threats.push(event);    
-  // }
-
-  // initThreat() {
-  //   // initialize our address
-
-  // }
+  exists: boolean = false;
 
   showXAxis = true;
   showYAxis = true;
@@ -61,45 +43,46 @@ view: any[] = [700, 400];
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  onSelect(event:any){
-        console.log(event);
-    }
-
-  ngOnInit(): void {    
-    this.route.params
-      .map(param => this.store.dispatch(new projectActions.GetProject(param.id)))
-      .subscribe();
-
-    this.project$ = this.store.select(fromRoot.getSelectedProject);
-this.results=[
-    {
-    "name": "Germany",
-    "value": 40632
-  },
-  {
-    "name": "United States",
-    "value": 49737
-  },
-  {
-    "name": "France",
-    "value": 36745
-  },
-  {
-    "name": "United Kingdom",
-    "value": 36240
-  },
-  {
-    "name": "Spain",
-    "value": 33000
-  },
-  {
-    "name": "Italy",
-    "value": 35800
+  onSelect(event: any) {
+    console.log(event);
   }
-];
+
+  ngOnInit(): void {
+    this.route.params
+      .map(param => {
+        this.exists = param.id !== undefined;
+        this.store.dispatch(new projectActions.GetProject(param.id))
+
+        if (this.exists) {
+          this.store.select(fromRoot.getSelectedProject).subscribe(project => {
+            if (project) {
+              this.project = project;
+
+              //todo this is graph creation and can live in a service
+              let results = [];
+
+              for (let entry of project.threats) {
+                results = [...results, { name: entry.title, value: entry.probability }];
+              }
+
+              this.results = results;
+            }
+          });
+        }
+        else {
+          this.project = new Project();
+        }
+      })
+      .subscribe();
   }
 
   handleSaveProject(project: Project) {
-    this.store.dispatch(new projectActions.SaveProject(project));  
+    this.store.dispatch(new projectActions.SaveProject(project));
+  }
+
+  handleThreatAdded(threat: Threat) {
+    this.project.threats = [...this.project.threats,threat];
+    console.log(this.project.threats);
+    //this.store.dispatch(new projectActions.AddThreatToSelectedProject(threat))
   }
 }

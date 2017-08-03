@@ -3,7 +3,7 @@
         <h1>
             <img src="/images/food.svg"> Your Projects
         </h1>
-        <a class="btn__add" [routerLink]="['../meals/new']">
+        <a class="btn__add" [routerLink]="['/project']">
           <img src="/images/add-white.svg">
           New Project
         </a>
@@ -11,7 +11,7 @@
 
     <div *ngIf="allProjects$ | async as projects; else loading;">
         <div class="message" *ngIf="!projects.length">
-            <img src="/img/face.svg"> No projects, add a new project to start
+            <img src="/images/face.svg"> No projects, add a new project to start
         </div>
 
         <list-item *ngFor="let project of projects" [item]="project" 

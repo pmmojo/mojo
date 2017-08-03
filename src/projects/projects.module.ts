@@ -12,6 +12,7 @@ import { ThreatsDisplayComponent } from "./components/threats-display/threats-di
 import { SharedModule } from "../shared/shared.module";
 import { ProjectComponent } from "./containers/project/project.component";
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ProjectFormComponent } from "./components/project-form/project-form.component";
 
 @NgModule({
     imports: [
@@ -19,13 +20,15 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
         CommonModule,
         ReactiveFormsModule,
         EffectsModule.forFeature([ProjectsEffects]),
-NgxChartsModule,
+        NgxChartsModule,
         SharedModule
     ],
     exports: [],
     declarations: [
         ProjectsComponent,
         ProjectComponent,
+
+        ProjectFormComponent,
         ThreatInputComponent,
         ThreatsDisplayComponent
     ],

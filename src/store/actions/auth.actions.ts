@@ -67,7 +67,6 @@ export class Register implements Action {
 
 export class RegisterSuccess implements Action {
     readonly type = REGISTER_SUCCESS;
-    constructor() { }
 }
 
 export class RegisterFailed implements Action {

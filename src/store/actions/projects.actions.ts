@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Project } from "../../projects/models/project.interface";
+import { Threat } from "../../threats/models/threat.interface";
 
 export const GET_PROJECT = '[Projects] Get Project';
 export const GET_PROJECT_SUCCESS = '[Projects] Get Project Success';
@@ -18,53 +19,55 @@ export const SET_PROJECTS = '[Projects] Set Projects';
 export const SET_PROJECTS_SUCCESS = '[Projects] Set Projects Success';
 export const SET_PROJECTS_FAIL = '[Projects] Set Projects Fail';
 
+export const ADD_THREAT_TO_SELECTED_PROJECT = '[Project Threat] Add Threat To Selected Project';
+
 export class GetProject implements Action {
     readonly type = GET_PROJECT;
     constructor(public payload: string) {
-        console.log('get project fired action',payload);
+        console.log('get project fired action', payload);
     }
 }
 
 export class GetProjectSuccess implements Action {
     readonly type = GET_PROJECT_SUCCESS;
     constructor(public payload: Project) {
-      //  console.log('success login fired action',payload);
+        //  console.log('success login fired action',payload);
     }
 }
 
 export class GetProjectFailed implements Action {
     readonly type = GET_PROJECT_FAIL;
     constructor(error) {
-       // console.log('BOOM ERROR get project', error);
+        // console.log('BOOM ERROR get project', error);
     }
 }
 
 export class GetAllProjects implements Action {
     readonly type = GET_ALL_PROJECTS;
     constructor() {
-       // console.log('GET_ALL_PROJECTS fired action');
+        // console.log('GET_ALL_PROJECTS fired action');
     }
-    
+
 }
 
 export class GetAllProjectsSuccess implements Action {
     readonly type = GET_ALL_PROJECTS_SUCCESS;
     constructor(public payload: Project[]) {
-     //   console.log('success GET_ALL_PROJECTS_SUCCESS fired action', payload);
+        //   console.log('success GET_ALL_PROJECTS_SUCCESS fired action', payload);
     }
 }
 
 export class GetAllProjectsFailed implements Action {
     readonly type = GET_ALL_PROJECTS_FAIL;
     constructor() {
-       // console.log('BOOM ERROR get project');
+        // console.log('BOOM ERROR get project');
     }
 }
 
 export class SaveProject implements Action {
     readonly type = SAVE_PROJECT;
     constructor(public payload: Project) {
-        console.log('Save project fired action',payload);
+        console.log('Save project fired action', payload);
     }
 }
 
@@ -85,7 +88,7 @@ export class SaveProjectFailed implements Action {
 export class SetProjects implements Action {
     readonly type = SET_PROJECTS;
     constructor(public payload: Project) {
-        console.log('Save project fired action',payload);
+        console.log('Save project fired action', payload);
     }
 }
 
@@ -103,6 +106,13 @@ export class SetProjectsFailed implements Action {
     }
 }
 
+export class AddThreatToSelectedProject implements Action {
+    readonly type = ADD_THREAT_TO_SELECTED_PROJECT;
+    constructor(public payload: Threat) {
+        console.log('Save project fired action', payload);
+    }
+}
+
 export type All
     = GetProject
     | GetProjectSuccess
@@ -115,4 +125,5 @@ export type All
     | SaveProjectFailed
     | SetProjects
     | SetProjectsSuccess
-    | SetProjectsFailed;
+    | SetProjectsFailed
+    | AddThreatToSelectedProject;

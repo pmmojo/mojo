@@ -4,8 +4,8 @@ import { Threat } from "../../../threats/models/threat.interface";
 @Component({
     selector: 'threats-display',
     template: `   
-       the list           
-       <table id="table" class="table table-hover table-mc-light-blue">
+             
+       <table *ngIf="threats.length > 0" id="table" class="table table-hover table-mc-light-blue">
        <tr>
             <th>
                     Threat
@@ -22,7 +22,6 @@ import { Threat } from "../../../threats/models/threat.interface";
             </th>
             <th>
                     Cumulative level of success
-
             </th>
        </tr>
        <tbody>

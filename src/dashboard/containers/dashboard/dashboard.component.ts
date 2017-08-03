@@ -7,14 +7,9 @@ import { Component } from '@angular/core';
       <div class="meals__title">
         <h1>
           <img src="/images/food.svg">
-          Your meals
+          Dashboard to go here
         </h1>
-        <a 
-          class="btn__add"
-          [routerLink]="['../meals/new']">
-          <img src="/images/add-white.svg">
-          New meal
-        </a>
+       
       </div>
       
       <ng-template #loading>
@@ -28,3 +23,10 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent { 
 }
+
+ // <a 
+        //   class="btn__add"
+        //   [routerLink]="['../meals/new']">
+        //   <img src="/images/add-white.svg">
+        //   New meal
+        // </a>

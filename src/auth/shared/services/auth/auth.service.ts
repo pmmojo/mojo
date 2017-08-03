@@ -55,7 +55,8 @@ export class AuthService {
 
   createUser(email: string, password: string) {
     return this.af.auth
-      .createUserWithEmailAndPassword(email, password).catch((error) => {
+      .createUserWithEmailAndPassword(email, password)
+      .catch((error) => {
         // Handle Errors here.
         console.log(error);
       });

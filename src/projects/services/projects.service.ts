@@ -37,6 +37,7 @@ export class ProjectsService {
     }
 
     addProject(project: Project) {       
+        console.log('in service',project);
         return this.db.list(`meals/${this.uid}`).push(project);
     }
 

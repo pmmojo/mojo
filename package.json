@@ -32,6 +32,7 @@
     "d3": "^4.10.0",
     "firebase": "^4.2.0",
     "firebase-auth": "^0.1.2",
+    "ng2-validation": "^4.2.0",
     "ngrx-store-freeze": "^0.1.9",
     "reselect": "^3.0.1",
     "rxjs": "^5.4.2",

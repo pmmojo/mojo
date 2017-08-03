@@ -17,7 +17,7 @@ export function reducer(state = initialState, action: Action): State {
     //console.log('calling project reducer with action',action)    ;
     switch (action.type) {
         case ProjectsActions.GET_PROJECT_SUCCESS: {                        
-          //  console.log('success GET_PROJECT_SUCCESS reducer fired', action.payload);
+            console.log('success GET_PROJECT_SUCCESS reducer fired', action.payload);
             return Object.assign({}, state, {
                 selectedProject: action.payload
             });
@@ -35,6 +35,17 @@ export function reducer(state = initialState, action: Action): State {
             return Object.assign({}, state, {
                 projects: action.payload
             });
+        }
+        case ProjectsActions.ADD_THREAT_TO_SELECTED_PROJECT: {                        
+           // console.log('success SET_PROJECTS reducer fired', action.payload);
+          state.selectedProject.threats.push(action.payload);
+//todo this is wrong make immutable!!!
+console.log(state);
+          return state;
+    //        return Object.assign({}, state, {
+    //     selectedProject.threats: [ ...state.selectedProject.threats, action.payload ]
+    //   }); 
+    
         }
        
         default: {

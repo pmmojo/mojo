@@ -42,6 +42,7 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'threats', component: ThreatsComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'project-groups', component: ProjectGroupsComponent, canActivate: [AuthGuard] },
   { path: 'project-group/:id', component: ProjectGroupsComponent, canActivate: [AuthGuard] },

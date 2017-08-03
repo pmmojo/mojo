@@ -1,55 +1,28 @@
-<!-- simon <pre>{{results|json}}</pre> -->
-<div class="meals" *ngIf="project$ | async as project; else loading;">
+<div class="meals" *ngIf="project">
     <div class="meals__title">
         <h1>
             <img src="/images/food.svg"> Project: {{project.title}}
         </h1>
         <a class="btn__add" [routerLink]="['../meals/new']">
-          <img src="/images/add-white.svg">
-          New Project
-        </a>
+                <img src="/images/add-white.svg"> Edit
+            </a>
     </div>
-        
-    <div *ngIf="project; else loading;">
-         <ngx-charts-bar-horizontal
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="results"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
+    
+    <div *ngIf="project && exists">
+        <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="results" [gradient]="gradient" [xAxis]="showXAxis"
+            [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="'Nightshelters Attended'"
+            (select)="onSelect($event)">
+        </ngx-charts-bar-horizontal>
 
-      [yAxisLabel]="'Nightshelters Attended'"
-      (select)="onSelect($event)">
-    </ngx-charts-bar-horizontal> 
-        
- <threats-display [threats]="project.threats"></threats-display>         
+        <threats-display [threats]="project.threats"></threats-display>
     </div>
-<!-- 
-     <div class="message" *ngIf="!project">
-            <img src="/img/face.svg"> No projects, add a new project to start
-        </div>  -->
 
-    <ng-template #loading>
-        <div class="message">
-            <img src="/images/loading.svg"> Fetching project...
-        </div>
-    </ng-template>
+    <div class="message" *ngIf="!project">
+        <img src="/img/face.svg"> No projects, add a new project to start
+    </div>
 
-    <!-- <form [formGroup]="form">
-        <label>Title</label>
-        <input type="text" placeholder="Enter project title" formControlName="title">
-
-        <h3>
-            Need a list of threats
-        </h3>
-
-        
-        <threat-form (handleSaveThreat)="addThreat($event)"></threat-form>
-
-        <button (click)="handleSaveProject(form.value)">Save</button>
-    </form> -->
+    <div *ngIf="project">
+        <project-form [project]="project" (handleSaveProject)="handleSaveProject($event)" ></project-form>
+        <!-- (handleSaveThreat)="handleThreatAdded($event)" -->
+    </div>
 </div>
