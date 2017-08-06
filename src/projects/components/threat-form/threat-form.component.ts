@@ -4,34 +4,8 @@ import { CustomValidators } from 'ng2-validation';
 
 @Component({
     selector: 'threat-form',
-    template: `   
-        <h3>
-   threat input
-        </h3>
-
-        <div [formGroup]="form">        
-          <label>Title</label>
-          <input type="text" placeholder="Enter threat title" formControlName="title">
-                
-          <div class="error" *ngIf="required">
-              Workout name is required
-            </div>
-          <label>Impact</label>
-          <input type="text" placeholder="Enter threat impact" formControlName="impact">
-          <p *ngIf="">number error</p>
-          <p *ngIf="form.get('impact').hasError('range') && this.form.get('impact').touched">range error</p>
-          <div class="error" *ngIf="required">
-              Workout name is required
-            </div>
-          <label>Probability</label>
-          <input type="text" placeholder="Enter threat probability" formControlName="probability">
-          <p *ngIf="form.get('probability').hasError('number') && this.form.get('probability').touched">number error</p>
-          <p *ngIf="form.get('probability').hasError('range') && this.form.get('probability').touched">range error</p>
-          
-          <button [disabled]="form.invalid" type="button" (click)="saveThreat()">Add threat</button>
-        
-        </div>        
-  `
+    styleUrls: ['threat-form.component.scss'],
+    templateUrl: 'threat-form.component.html'
 })
 export class ThreatInputComponent implements OnInit {
     form: FormGroup;
@@ -45,20 +19,28 @@ export class ThreatInputComponent implements OnInit {
         this.form = this.initThreat();
     }
 
-    get impactInvalid() {
-    return (
-    //   this.form.get('name').hasError('required') &&
-    //   this.form.get('name').touched
+    get titleRequired() {
+        return (
+            this.form.get('title').hasError('required') && this.form.get('title').touched);
+    }
 
-      this.form.get('impact').hasError('number') && this.form.get('impact').touched
-    );
-  }
+    get impactInvalid() {
+        return (
+            (this.form.get('impact').hasError('number') || this.form.get('impact').hasError('range'))
+            && this.form.get('impact').touched);
+    }
+
+    get probabilityInvalid() {
+        return (
+            (this.form.get('probability').hasError('number') || this.form.get('probability').hasError('range'))
+            && this.form.get('probability').touched);
+    }
 
     initThreat() {
         return this.fb.group({
             title: ['', [Validators.required]],
-            impact: ['',  [Validators.required,CustomValidators.number,CustomValidators.range([0.001, 1])]],
-            probability: ['', [Validators.required,CustomValidators.number,CustomValidators.range([0.001, 1])]]
+            impact: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]],
+            probability: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]]
         });
     }
 

@@ -10,7 +10,8 @@ import { ProjectsEffects } from "../store/effects/projects.effects";
 import { ThreatInputComponent } from "./components/threat-form/threat-form.component";
 import { ThreatsDisplayComponent } from "./components/threats-display/threats-display.component";
 import { SharedModule } from "../shared/shared.module";
-import { ProjectComponent } from "./containers/project/project.component";
+import { ProjectEditComponent } from "./containers/project-edit/project-edit.component";
+import { ProjectViewComponent } from "./containers/project-view/project-view.component";
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ProjectFormComponent } from "./components/project-form/project-form.component";
 
@@ -26,7 +27,8 @@ import { ProjectFormComponent } from "./components/project-form/project-form.com
     exports: [],
     declarations: [
         ProjectsComponent,
-        ProjectComponent,
+        ProjectViewComponent,
+ProjectEditComponent,
 
         ProjectFormComponent,
         ThreatInputComponent,

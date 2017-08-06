@@ -862,3 +862,44 @@ body {
     }
   }
 }
+
+// Forms
+.form{
+
+  .form__section{
+    padding: 30px;
+    flex-direction: column;
+    border-bottom: 1px solid #d1deeb;
+
+    h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  input {
+    outline: 0;
+    font-size: 16px;
+    padding: 10px 15px;
+    margin: 0;
+    width: 100%;
+    background: #fff;
+    color: #545e6f;
+    flex-grow: 1;
+    border: 1px solid #d1deeb;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+    border-color: #a5b9ce;
+  }
+
+   &__submit {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+  }
+}
+
+  }
+  
+}

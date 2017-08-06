@@ -11,7 +11,7 @@ import { Threat } from "../../../threats/models/threat.interface";
     styleUrls: ['project-form.component.scss'],
     templateUrl: 'project-form.component.html'
 })
-export class ProjectFormComponent implements OnInit {
+export class ProjectFormComponent implements OnChanges {
 
     @Input()
     project: Project;
@@ -22,7 +22,7 @@ export class ProjectFormComponent implements OnInit {
     @Output()
     handleSaveThreat: EventEmitter<Threat> = new EventEmitter<Threat>();
 
-    form: FormGroup;
+    form: FormGroup = this.initThreat();
 
     constructor(private fb: FormBuilder) { }
 
@@ -30,28 +30,32 @@ export class ProjectFormComponent implements OnInit {
         return this.form.get('threats') as FormArray;
     }
 
-    exists: boolean = false;
-
-    // ngOnChanges(change:SimpleChanges) {
-    //     console.log('changing project form');
-    //     if (this.project && this.project.title) {
-    //         //this.exists = true;
-    //         //this.emptyIngredients();
-
-    //         const value = this.project;
-    //         this.form.patchValue(value);
-
-    //         if (value.threats) {
-    //             for (const item of value.threats) {
-    //                 this.threats.push(new FormControl(item));
-    //             }
-    //         }
-    //     }
-    // }
-
-    ngOnInit(): void {
-        this.form = this.initThreat();
+    get exists(): boolean {
+        console.log('exists',this.project);
+        return this.project.$key !== undefined;
     }
+    
+    ngOnChanges(change: SimpleChanges) {
+
+        if (this.project && this.form) {
+            console.log('changing project form');
+            //this.exists = true;
+            //this.emptyIngredients();
+
+            const value = this.project;
+            this.form.patchValue(value);
+
+            // if (value.threats) {
+            //     for (const item of value.threats) {
+            //         this.threats.push(new FormControl(item));
+            //     }
+            // }
+        }
+    }
+
+    // ngOnInit(): void {
+    //     this.form = this.initThreat();
+    // }
 
     initThreat() {
         return this.fb.group({

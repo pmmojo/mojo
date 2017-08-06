@@ -38,6 +38,8 @@ export class ProjectsEffects {
         .ofType(ProjectsActions.SAVE_PROJECT)
         .map(toPayload)
         .mergeMap(payload =>
+            //todo is here a good place to check if it exists?
+            //todo do a create/edit type save
             this.projectService.addProject(payload)
                 .then(data => new ProjectsActions.SaveProjectSuccess())
                 .catch(() => of(new ProjectsActions.SaveProjectFailed()))

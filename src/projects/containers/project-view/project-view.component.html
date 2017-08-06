@@ -3,26 +3,19 @@
         <h1>
             <img src="/images/food.svg"> Project: {{project.title}}
         </h1>
-        <a class="btn__add" [routerLink]="['../meals/new']">
+        <a class="btn__add" [routerLink]="['../../edit', project.$key]">
                 <img src="/images/add-white.svg"> Edit
             </a>
     </div>
     
-    <div *ngIf="project && exists">
+    <div *ngIf="project">
         <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="results" [gradient]="gradient" [xAxis]="showXAxis"
             [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="'Nightshelters Attended'"
             (select)="onSelect($event)">
-        </ngx-charts-bar-horizontal>
-
-        <threats-display [threats]="project.threats"></threats-display>
+        </ngx-charts-bar-horizontal>        
     </div>
 
     <div class="message" *ngIf="!project">
         <img src="/img/face.svg"> No projects, add a new project to start
-    </div>
-
-    <div *ngIf="project">
-        <project-form [project]="project" (handleSaveProject)="handleSaveProject($event)" ></project-form>
-        <!-- (handleSaveThreat)="handleThreatAdded($event)" -->
-    </div>
+    </div>    
 </div>

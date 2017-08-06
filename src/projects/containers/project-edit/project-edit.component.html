@@ -1,0 +1,10 @@
+<div class="meals" *ngIf="project">
+    <div class="meals__title">
+        <h1>
+            <img src="/images/food.svg"> Project: {{project.title}}
+        </h1>        
+    </div>
+     
+    
+    <project-form [project]="project" (handleSaveProject)="handleSaveProject($event)" ></project-form>        
+</div>

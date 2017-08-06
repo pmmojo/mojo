@@ -13,13 +13,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Threat } from "../../../threats/models/threat.interface";
 
 @Component({
-  templateUrl: 'project.component.html'
+  templateUrl: 'project-view.component.html'
 })
-export class ProjectComponent implements OnInit {
+export class ProjectViewComponent implements OnInit {
   project: Project;
-  //project$: Observable<Project>;
-  allProjects$: Observable<Project[]>;
-
+  
   view: any[] = [700, 400];
 
   results: any[];
@@ -74,15 +72,5 @@ export class ProjectComponent implements OnInit {
         }
       })
       .subscribe();
-  }
-
-  handleSaveProject(project: Project) {
-    this.store.dispatch(new projectActions.SaveProject(project));
-  }
-
-  handleThreatAdded(threat: Threat) {
-    this.project.threats = [...this.project.threats,threat];
-    console.log(this.project.threats);
-    //this.store.dispatch(new projectActions.AddThreatToSelectedProject(threat))
   }
 }

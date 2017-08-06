@@ -35,15 +35,17 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthGuard } from "../auth/shared/guards/auth.guard";
 import { AppNavComponent } from "./components/app-nav/app-nav.component";
 import { AppHeaderComponent } from "./components/app-header/app-header.component";
-import { ProjectComponent } from "../projects/containers/project/project.component";
+import { ProjectEditComponent } from "../projects/containers/project-edit/project-edit.component";
+import { ProjectViewComponent } from "../projects/containers/project-view/project-view.component";
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent , canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'threats', component: ThreatsComponent, canActivate: [AuthGuard] },
   { path: 'projects', component: ProjectsComponent, canActivate: [AuthGuard] },
-  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
-  { path: 'project/:id', component: ProjectComponent, canActivate: [AuthGuard] },
+  { path: 'project/new', component: ProjectEditComponent, canActivate: [AuthGuard] },
+  { path: 'project/edit/:id', component: ProjectEditComponent, canActivate: [AuthGuard] },
+  { path: 'project/view/:id', component: ProjectViewComponent, canActivate: [AuthGuard] },
   { path: 'project-groups', component: ProjectGroupsComponent, canActivate: [AuthGuard] },
   { path: 'project-group/:id', component: ProjectGroupsComponent, canActivate: [AuthGuard] },
   { path: 'threats', component: ThreatsComponent, canActivate: [AuthGuard] },
