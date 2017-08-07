@@ -13,32 +13,42 @@ import { AngularFireDatabase } from "angularfire2/database";
 import { AuthService, User } from "../../auth/shared/services/auth/auth.service";
 
 @Injectable()
-export class ProjectsService {    
-        user$ = this.store.select<User>(fromRoot.getAuthenticatedUsed).subscribe();
-        userSubscription$ = this.store.select<User>(fromRoot.getAuthenticatedUsed).subscribe();
-    
+export class ProjectsService {
+    user$ = this.store.select<User>(fromRoot.getAuthenticatedUsed).subscribe();
+    userSubscription$ = this.store.select<User>(fromRoot.getAuthenticatedUsed).subscribe();
+
     constructor(
         private store: Store<fromRoot.State>,
         private db: AngularFireDatabase,
         private authService: AuthService
-    ) { 
+    ) {
     }
 
-     get uid() {
-    return this.authService.user.uid;
-  }
+    get uid() {
+        return this.authService.user.uid;
+    }
 
-    getProject(key: string) :Observable<Project> {
-        //console.log('service 1');
+    getProject(key: string): Observable<Project> {
         if (!key) return Observable.of(new Project());
-//console.log('service 2.', key);
-        return this.store.select<Project[]>(fromRoot.getAllProjects)
-            .map(projects => projects.find((project: Project) => project.$key === key));
+
+        return this.db.object(`projects/${this.uid}/${key}`);            
     }
 
-    addProject(project: Project) {       
-        console.log('in service',project);
-        return this.db.list(`meals/${this.uid}`).push(project);
+    addProject(project: Project) {
+        const projectKey = this.db.list('/').push(undefined).key;
+
+        var newProjectData = {};
+        newProjectData[`projects/${this.uid}/${projectKey}`] = project;
+
+        newProjectData[`projectSummarys/${this.uid}/${projectKey}`] = {
+            title: project.title,
+            projectKey:projectKey
+        };
+
+        //may not even need this
+        newProjectData[`projectThreats/${this.uid}/${projectKey}`] = project.threats;
+
+        return this.db.object('/').update(newProjectData);
     }
 
     updateMeal(key: string, meal: Project) {
@@ -49,7 +59,9 @@ export class ProjectsService {
         return this.db.list(`meals/${this.uid}`).remove(key);
     }
 
-    getAllProjects() {        
-        return this.db.list(`meals/${this.uid}`);
+    getAllProjects() {
+        //todo this is going to get summaries!
+        //add return type of summary objects not full project!
+        return this.db.list(`projectSummarys/${this.uid}`);
     }
 }

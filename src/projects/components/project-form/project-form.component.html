@@ -1,7 +1,7 @@
-<div class="form">
+<div class="project-form form">
   <form [formGroup]="form">
     <div class="form__section">
-      <h3>Project title {{exists}}</h3>
+      <h3>Project title</h3>
       <input type="text" placeholder="e.g. H2 Railway Development" formControlName="title">
     </div>
 
@@ -12,8 +12,9 @@
       </div>
     </div>
 
-    <div class="form__submit">
+    <div class="project-form__submit">
       <div>
+        
         <button type="button" class="button" *ngIf="!exists" (click)="createProject()">Create</button>
         <button type="button" class="button" *ngIf="exists" (click)="updateProject()">Update</button>
 

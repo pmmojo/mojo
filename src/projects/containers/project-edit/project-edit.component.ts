@@ -29,7 +29,8 @@ export class ProjectEditComponent implements OnInit {
         this.store.dispatch(new projectActions.GetProject(param.id))
         
           this.store.select(fromRoot.getSelectedProject).subscribe(project => {
-            if (project && project.$key) {
+            //&& project.$key
+            if (project ) {
               this.project = project;             
               console.log(project);
             }else{
@@ -45,7 +46,14 @@ export class ProjectEditComponent implements OnInit {
       .subscribe();
   }
 
-  handleSaveProject(project: Project) {    
+  handleCreateProject(project: Project) {    
+    console.log('creating this:',project);
+    this.store.dispatch(new projectActions.SaveProject(project));
+  }
+
+  handleUpdateProject(project: Project) {    
+    console.log('updating this:',project);
+    //todo new actions for update and create instead of just save!
     this.store.dispatch(new projectActions.SaveProject(project));
   }
 

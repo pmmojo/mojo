@@ -37,7 +37,7 @@ export class ThreatInputComponent implements OnInit {
     }
 
     initThreat() {
-        return this.fb.group({
+        return this.fb.group({            
             title: ['', [Validators.required]],
             impact: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]],
             probability: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]]

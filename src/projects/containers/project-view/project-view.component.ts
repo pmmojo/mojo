@@ -17,7 +17,7 @@ import { Threat } from "../../../threats/models/threat.interface";
 })
 export class ProjectViewComponent implements OnInit {
   project: Project;
-  
+
   view: any[] = [700, 400];
 
   results: any[];
@@ -59,10 +59,12 @@ export class ProjectViewComponent implements OnInit {
               //todo this is graph creation and can live in a service
               let results = [];
 
-              for (let entry of project.threats) {
-                results = [...results, { name: entry.title, value: entry.probability }];
+              if (project.threats) {
+                for (let entry of project.threats) {
+                  results = [...results, { name: entry.title, value: entry.probability }];
+                }
               }
-
+              
               this.results = results;
             }
           });

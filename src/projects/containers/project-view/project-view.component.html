@@ -1,4 +1,4 @@
-<div class="meals" *ngIf="project">
+<div class="meals" *ngIf="project">    
     <div class="meals__title">
         <h1>
             <img src="/images/food.svg"> Project: {{project.title}}
@@ -8,14 +8,14 @@
             </a>
     </div>
     
-    <div *ngIf="project">
+    <div *ngIf="project && project.threats">
         <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="results" [gradient]="gradient" [xAxis]="showXAxis"
             [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="'Nightshelters Attended'"
             (select)="onSelect($event)">
         </ngx-charts-bar-horizontal>        
     </div>
 
-    <div class="message" *ngIf="!project">
-        <img src="/img/face.svg"> No projects, add a new project to start
+    <div class="message" *ngIf="!project.threats">
+        <img src="/images/face.svg"> No threats are currently assigned to this project
     </div>    
 </div>

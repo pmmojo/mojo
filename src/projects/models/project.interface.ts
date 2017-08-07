@@ -5,7 +5,7 @@ export class Project {
         this.threats = new Array<Threat>();
     }
 
-    $key: string;
+    //$key: string;
     title: string;
     timestamp: number;
     $exists: () => boolean;

@@ -4,7 +4,6 @@
             <img src="/images/food.svg"> Project: {{project.title}}
         </h1>        
     </div>
-     
-    
-    <project-form [project]="project" (handleSaveProject)="handleSaveProject($event)" ></project-form>        
+         
+    <project-form [project]="project" (handleCreateProject)="handleCreateProject($event)"  (handleUpdateProject)="handleUpdateProject($event)" ></project-form>        
 </div>
