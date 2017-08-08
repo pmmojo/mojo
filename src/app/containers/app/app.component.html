@@ -3,12 +3,6 @@
 <app-nav *ngIf="(user$ | async)?.authenticated">
 </app-nav>
 
-<!-- <div *ngIf="user$|async as user">
-    Hello {{user.email}}
-</div> -->
-
-<!-- <pre>{{user$|async|json}}</pre> -->
-
 <div *ngIf="user$|async">
   <left-nav></left-nav>
   

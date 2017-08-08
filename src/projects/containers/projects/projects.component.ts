@@ -62,7 +62,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   handleSaveProject(project: Project) {
-    this.store.dispatch(new projectActions.SaveProject(project));
+    this.store.dispatch(new projectActions.CreateProject(project));
 
     //todo need something here to redirect upon a successful save.
     //dont want to do that in the effect as we may not want to do that if we save a project elsewhere

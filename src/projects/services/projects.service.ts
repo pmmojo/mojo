@@ -51,8 +51,20 @@ export class ProjectsService {
         return this.db.object('/').update(newProjectData);
     }
 
-    updateMeal(key: string, meal: Project) {
-        return this.db.object(`meals/${this.uid}/${key}`).update(meal);
+    updateProject(projectKey: string, project: Project) {
+        console.log('in project service updating with this object and key',projectKey,project);
+         var newProjectData = {};
+        newProjectData[`projects/${this.uid}/${projectKey}`] = project;
+
+        newProjectData[`projectSummarys/${this.uid}/${projectKey}`] = {
+            title: project.title,
+            projectKey:projectKey
+        };
+
+        //may not even need this
+        newProjectData[`projectThreats/${this.uid}/${projectKey}`] = project.threats;
+
+        return this.db.object('/').update(newProjectData);
     }
 
     removeMeal(key: string) {

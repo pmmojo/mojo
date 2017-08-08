@@ -34,14 +34,21 @@ export class ProjectsEffects {
                 .catch((error) => of(new ProjectsActions.GetProjectFailed(error)))
         );
 
-        @Effect() saveProject$: Observable<Action> = this.actions$
-        .ofType(ProjectsActions.SAVE_PROJECT)
+        @Effect() createProject$: Observable<Action> = this.actions$
+        .ofType(ProjectsActions.CREATE_PROJECT)
         .map(toPayload)
-        .mergeMap(payload =>
-            //todo is here a good place to check if it exists?
-            //todo do a create/edit type save
+        .mergeMap(payload =>            
             this.projectService.addProject(payload)
-                .then(data => new ProjectsActions.SaveProjectSuccess())
-                .catch(() => of(new ProjectsActions.SaveProjectFailed()))
+                .then(data => new ProjectsActions.CreateProjectSuccess())
+                .catch(() => of(new ProjectsActions.CreateProjectFailed()))
+        );
+
+        @Effect() updateProject$: Observable<Action> = this.actions$
+        .ofType(ProjectsActions.UPDATE_PROJECT)
+        .map(toPayload)
+        .mergeMap(payload =>            
+            this.projectService.updateProject(payload.key,payload.project)
+                .then(data => new ProjectsActions.UpdateProjectSuccess())
+                .catch(() => of(new ProjectsActions.UpdateProjectFailed()))
         );
 }

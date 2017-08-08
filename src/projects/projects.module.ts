@@ -14,6 +14,7 @@ import { ProjectEditComponent } from "./containers/project-edit/project-edit.com
 import { ProjectViewComponent } from "./containers/project-view/project-view.component";
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ProjectFormComponent } from "./components/project-form/project-form.component";
+import { ScheduleAssignComponent } from "./components/schedule-assign/schedule-assign.component";
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ ProjectEditComponent,
 
         ProjectFormComponent,
         ThreatInputComponent,
-        ThreatsDisplayComponent
+        ThreatsDisplayComponent,
+        ScheduleAssignComponent
     ],
     providers: [ProjectsService],
 })

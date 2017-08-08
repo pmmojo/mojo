@@ -7,14 +7,14 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   template: `
     <div class="app-nav">
       <div class="wrapper">
-          <a [routerLink]="['/dashboard']">Dashboard</a>
-          <a [routerLink]="['/projects']">Projects</a>
-          <a [routerLink]="['/project-groups']">Project Groups</a>
-          <a [routerLink]="['/threats']">Threats</a>        
+          <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
+          <a routerLink="projects" routerLinkActive="active">Projects</a>                
       </div>
     </div>
   `
 })
 export class AppNavComponent {
   constructor() {}
+  // <a [routerLink]="['/project-groups']">Project Groups</a>
+  //         <a [routerLink]="['/threats']">Threats</a>  
 }

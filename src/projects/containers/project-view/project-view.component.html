@@ -10,7 +10,8 @@
     
     <div *ngIf="project && project.threats">
         <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="results" [gradient]="gradient" [xAxis]="showXAxis"
-            [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="'Nightshelters Attended'"
+            [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [yAxisLabel]="'Cumulative Success Level'"
+             [xAxisLabel]="'Cumulative Success Level'"
             (select)="onSelect($event)">
         </ngx-charts-bar-horizontal>        
     </div>
@@ -19,3 +20,5 @@
         <img src="/images/face.svg"> No threats are currently assigned to this project
     </div>    
 </div>
+
+<schedule-assign *ngIf="threatEditOpen" (cancel)="handleCancel()"></schedule-assign>

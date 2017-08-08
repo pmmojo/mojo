@@ -27,6 +27,7 @@ export class ProjectViewComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   exists: boolean = false;
+  threatEditOpen: boolean = false;
 
   showXAxis = true;
   showYAxis = true;
@@ -34,15 +35,19 @@ export class ProjectViewComponent implements OnInit {
   showLegend = true;
   showXAxisLabel = true;
   xAxisLabel = 'Country';
-  showYAxisLabel = true;
+  //  showYAxisLabel = true;
   yAxisLabel = 'Population';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#5AA454']
   };
 
-  onSelect(event: any) {
-    console.log(event);
+  onSelect(event: any) {    
+    this.threatEditOpen = true;
+  }
+
+  handleCancel() {
+    this.threatEditOpen = false;
   }
 
   ngOnInit(): void {
@@ -64,7 +69,7 @@ export class ProjectViewComponent implements OnInit {
                   results = [...results, { name: entry.title, value: entry.probability }];
                 }
               }
-              
+
               this.results = results;
             }
           });

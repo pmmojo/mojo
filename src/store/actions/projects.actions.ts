@@ -11,9 +11,13 @@ export const GET_ALL_PROJECTS = '[Projects] Get All Projects';
 export const GET_ALL_PROJECTS_SUCCESS = '[Projects] Get All Projects Success';
 export const GET_ALL_PROJECTS_FAIL = '[Projects] Get All Projects Fail';
 
-export const SAVE_PROJECT = '[Projects] Save Project';
-export const SAVE_PROJECT_SUCCESS = '[Projects] Save Project Success';
-export const SAVE_PROJECT_FAIL = '[Projects] Save Project Fail';
+export const CREATE_PROJECT = '[Projects] Create Project';
+export const CREATE_PROJECT_SUCCESS = '[Projects] Create Project Success';
+export const CREATE_PROJECT_FAIL = '[Projects] Create Project Fail';
+
+export const UPDATE_PROJECT = '[Projects] Update Project';
+export const UPDATE_PROJECT_SUCCESS = '[Projects] Update Project Success';
+export const UPDATE_PROJECT_FAIL = '[Projects] Update Project Fail';
 
 export const SET_PROJECTS = '[Projects] Set Projects';
 export const SET_PROJECTS_SUCCESS = '[Projects] Set Projects Success';
@@ -64,24 +68,45 @@ export class GetAllProjectsFailed implements Action {
     }
 }
 
-export class SaveProject implements Action {
-    readonly type = SAVE_PROJECT;
+export class CreateProject implements Action {
+    readonly type = CREATE_PROJECT;
     constructor(public payload: Project) {
-        console.log('Save project fired action', payload);
+        console.log('cREATE project fired action', payload);
     }
 }
 
-export class SaveProjectSuccess implements Action {
-    readonly type = SAVE_PROJECT_SUCCESS;
+export class CreateProjectSuccess implements Action {
+    readonly type = CREATE_PROJECT_SUCCESS;
     constructor() {
-        console.log('success Save fired action');
+        console.log('success cREATE fired action');
     }
 }
 
-export class SaveProjectFailed implements Action {
-    readonly type = SAVE_PROJECT_FAIL;
+export class CreateProjectFailed implements Action {
+    readonly type = CREATE_PROJECT_FAIL;
     constructor() {
-        console.log('BOOM ERROR Save project');
+        console.log('BOOM ERROR cREATE project');
+    }
+}
+
+export class UpdateProject implements Action {
+    readonly type = UPDATE_PROJECT;
+    constructor(public payload) {
+        console.log('UPDATE project fired action', payload);
+    }
+}
+
+export class UpdateProjectSuccess implements Action {
+    readonly type = UPDATE_PROJECT_SUCCESS;
+    constructor() {
+        console.log('success UPDATE fired action');
+    }
+}
+
+export class UpdateProjectFailed implements Action {
+    readonly type = UPDATE_PROJECT_FAIL;
+    constructor() {
+        console.log('BOOM ERROR UPDATE project');
     }
 }
 
@@ -120,9 +145,12 @@ export type All
     | GetAllProjects
     | GetAllProjectsSuccess
     | GetAllProjectsFailed
-    | SaveProject
-    | SaveProjectSuccess
-    | SaveProjectFailed
+    | CreateProject
+    | CreateProjectSuccess
+    | CreateProjectFailed
+    | UpdateProject
+    | UpdateProjectSuccess
+    | UpdateProjectFailed
     | SetProjects
     | SetProjectsSuccess
     | SetProjectsFailed

@@ -18,7 +18,7 @@
         <button type="button" class="button" *ngIf="!exists" (click)="createProject()">Create</button>
         <button type="button" class="button" *ngIf="exists" (click)="updateProject()">Update</button>
 
-        <a class="button button--cancel" [routerLink]="['../']">Cancel</a>
+        <a class="button button--cancel" (click)="cancel()">Cancel</a>
       </div>
 
       <div class="meal-form__delete" *ngIf="exists">

@@ -17,6 +17,12 @@ export class ProjectFormComponent implements OnChanges {
     handleCreateProject: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     @Output()
+    handleCancelAdd: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
+    handleCancelEdit: EventEmitter<void> = new EventEmitter<void>();
+
+    @Output()
     handleUpdateProject: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     form: FormGroup = this.initProject();
@@ -28,28 +34,29 @@ export class ProjectFormComponent implements OnChanges {
     }
 
     get exists(): boolean {
+        //todo not happy with this logic to define exists
         return this.project.title && this.project.title.length > 0;
     }
-    
+
     ngOnChanges(change: SimpleChanges) {
         if (this.project && this.form) {
             const value = this.project;
             this.form.patchValue(value);
 
             if (value.threats) {
-                 for (const item of value.threats) {                     
-                     const formThreat = this.initThreat();
-                     formThreat.patchValue(item);
+                for (const item of value.threats) {
+                    const formThreat = this.initThreat();
+                    formThreat.patchValue(item);
 
-                     this.threats.push(formThreat);
-                 }
-             }
+                    this.threats.push(formThreat);
+                }
+            }
         }
     }
 
-     initThreat() {
+    initThreat() {
         return this.fb.group({
-            $key: [''],
+            // $key: [''],
             title: ['', [Validators.required]],
             impact: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]],
             probability: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]]
@@ -58,7 +65,7 @@ export class ProjectFormComponent implements OnChanges {
 
     initProject() {
         return this.fb.group({
-           // $key: [''],
+            // $key: [''],
             title: ['', Validators.required],
             threats: this.fb.array([])
         });
@@ -73,12 +80,21 @@ export class ProjectFormComponent implements OnChanges {
 
     updateProject() {
         if (this.form.valid) {
-            this.handleUpdateProject.emit(this.form.value);            
+            this.handleUpdateProject.emit(this.form.value);
             this.form = this.initProject();
         }
     }
 
-    emitSaveThreat(threat: FormGroup) {        
+    emitSaveThreat(threat: FormGroup) {
         this.threats.push(threat);
     }
+
+    cancel() {
+        if (this.exists) {
+            this.handleCancelEdit.emit();
+        } else {
+            this.handleCancelAdd.emit();
+        }
+    }
+
 }
