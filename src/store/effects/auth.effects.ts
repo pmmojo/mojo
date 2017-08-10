@@ -30,7 +30,7 @@ export class AuthEffects {
     @Effect({ dispatch: false }) loginSuccess$: Observable<Action> = this.actions$
         .ofType(AuthActions.LOGIN_SUCCESS)
         .do(() =>
-            this.router.navigate(['/'])
+            this.router.navigate(['/projects'])
         );
 
     @Effect() logout$: Observable<Action> = this.actions$
@@ -58,6 +58,6 @@ export class AuthEffects {
 
     @Effect({ dispatch: false }) registerSuccess$: Observable<Action> = this.actions$
         .ofType(AuthActions.REGISTER_SUCCESS)
-        .do(() => this.router.navigate(['/']));
+        .do(() => this.router.navigate(['/projects']));
 
 }

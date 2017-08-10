@@ -1,40 +1,28 @@
-<div class="threat-form" [formGroup]="form">
+<div class="threat-form" [formGroup]="form">    
     <div class="threat-form__fields">
         <label>
             <h3>Title</h3>
             <input type="text" placeholder="e.g Brexit" formControlName="title">
         </label>
         <label>
-            <h3>Impact</h3>
-            <input type="text" placeholder="e.g 0.75" formControlName="impact">                    
+            <h3>Impact</h3>            
+            <impact-dropdown [parent]="form"></impact-dropdown> 
         </label>
         <label>
             <h3>Probability</h3>
-            <input type="text" placeholder="e.g 0.10" formControlName="probability">                    
+             <probability-dropdown [parent]="form"></probability-dropdown>             
         </label>
     </div>
 
     <div class="error" *ngIf="titleRequired">
-            Title is required
-        </div>
-
-        <div class="error" *ngIf="impactInvalid">
-            Enter impact between 0.01 and 1
-        </div>
-
-        <div class="error" *ngIf="probabilityInvalid">
-            Enter probability between 0.01 and 1
-        </div>
+        Please enter a project title
+    </div>
 
     <div>
-        
-        
-        <button [disabled]="form.invalid"
-              type="button"
-              class="threat-form__add"
-              (click)="saveThreat()">
+
+        <button [disabled]="form.invalid" type="button" class="threat-form__add" (click)="saveThreat()">
               <img src="/images/add-white.svg">
               Add threat
-            </button>        
+            </button>
     </div>
 </div>

@@ -1,27 +1,26 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Threat } from "../../../threats/models/threat.interface";
+import { Probability, ProbabilityLabel } from "../../../shared/enums/probability.enum";
 
 @Component({
     selector: 'threats-display',
-    template: `   
-             
+    template: `                
        <table *ngIf="threats.length > 0" id="table" class="table table-hover table-mc-light-blue">
        <tr>
             <th>
-                    Threat
+                Threat
             </th>
             <th>
-                    Impact
+                Impact
             </th>
             <th>
-                    Probability
+                Probability
             </th>
             <th>
-                    Impact x Prob
-
+                Score
             </th>
             <th>
-                    Cumulative level of success
+                Cumulative level of success
             </th>
        </tr>
        <tbody>
@@ -33,10 +32,10 @@ import { Threat } from "../../../threats/models/threat.interface";
                 {{threat.impact}}
             </td>
             <td>
-                {{threat.probability}}
+                {{probabilityLabel(threat.probability)}}
             </td>
             <td>
-                {{threat.probability}}
+                {{threat.score}}
             </td>
             <td>
                 {{threat.probability}}
@@ -50,4 +49,7 @@ export class ThreatsDisplayComponent {
     @Input()
     threats: Threat[];
 
+    probabilityLabel(prob:Probability):string{
+        return ProbabilityLabel(prob);
+    }
 }

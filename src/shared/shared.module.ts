@@ -2,7 +2,9 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ListItemComponent } from "./components/list-item/list-item.component";
-//import { ReactiveFormsModule } from '@angular/forms';
+import { ProbabilityComponent } from "./components/probability-dropdown/probability-dropdown.component";
+import { ReactiveFormsModule } from '@angular/forms';
+import { ImpactComponent } from "./components/impact-dropdown/impact-dropdown.component";
 
 // components
 //import { AuthFormComponent } from './components/auth-form/auth-form.component';
@@ -13,13 +15,18 @@ import { ListItemComponent } from "./components/list-item/list-item.component";
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   declarations: [
-    ListItemComponent
+    ListItemComponent,
+    ProbabilityComponent,
+    ImpactComponent
   ],
   exports: [
-    ListItemComponent
+    ListItemComponent,
+    ProbabilityComponent,
+    ImpactComponent
   ]
 })
 export class SharedModule {

@@ -1,6 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 import { CustomValidators } from 'ng2-validation';
+import { ThreatScoreService } from "../../../shared/services/impact-probability/impact-probability.service";
+import { Threat } from "../../../threats/models/threat.interface";
+import { Probability } from "../../../shared/enums/probability.enum";
+import { Impact } from "../../../shared/enums/impact.enum";
 
 @Component({
     selector: 'threat-form',
@@ -12,6 +16,7 @@ export class ThreatInputComponent implements OnInit {
 
     @Output()
     handleSaveThreat: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    //handleSaveThreat: EventEmitter<Threat> = new EventEmitter<Threat>();
 
     constructor(private fb: FormBuilder) { }
 
@@ -24,27 +29,28 @@ export class ThreatInputComponent implements OnInit {
             this.form.get('title').hasError('required') && this.form.get('title').touched);
     }
 
-    get impactInvalid() {
-        return (
-            (this.form.get('impact').hasError('number') || this.form.get('impact').hasError('range'))
-            && this.form.get('impact').touched);
-    }
-
-    get probabilityInvalid() {
-        return (
-            (this.form.get('probability').hasError('number') || this.form.get('probability').hasError('range'))
-            && this.form.get('probability').touched);
-    }
-
     initThreat() {
-        return this.fb.group({            
+        return this.fb.group({
             title: ['', [Validators.required]],
-            impact: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]],
-            probability: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]]
+            impact: ['', [Validators.required]],
+            probability: ['', [Validators.required]],
+            score: ['-1']
         });
     }
 
     saveThreat() {
+        //todo here we are in a position to set the threatScore before emitting        
+        let probability: Probability = Probability[<string>this.form.get('probability').value];
+        let impact: Impact = <Impact>this.form.get('impact').value;
+
+        console.log( probability);
+        console.log( impact);
+
+        console.log(typeof probability);
+        console.log(typeof impact);
+        
+        this.form.get('score').setValue(ThreatScoreService.getScore(probability, impact));
+
         this.handleSaveThreat.emit(this.form);
         this.form = this.initThreat();
     }

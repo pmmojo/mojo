@@ -2,10 +2,11 @@ import { Component, OnInit, EventEmitter, Output, OnChanges, SimpleChanges, Inpu
 import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 import { Project } from "../../models/project.interface";
 import { CustomValidators } from "ng2-validation";
+import { Threat } from "../../../threats/models/threat.interface";
 
 @Component({
     selector: 'project-form',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    //changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['project-form.component.scss'],
     templateUrl: 'project-form.component.html'
 })
@@ -15,6 +16,9 @@ export class ProjectFormComponent implements OnChanges {
 
     @Output()
     handleCreateProject: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
+    // @Output()
+    // handleAddThreat: EventEmitter<Threat> = new EventEmitter<Threat>();
 
     @Output()
     handleCancelAdd: EventEmitter<void> = new EventEmitter<void>();
@@ -39,6 +43,7 @@ export class ProjectFormComponent implements OnChanges {
     }
 
     ngOnChanges(change: SimpleChanges) {
+        console.log('on changes');
         if (this.project && this.form) {
             const value = this.project;
             this.form.patchValue(value);
@@ -55,11 +60,13 @@ export class ProjectFormComponent implements OnChanges {
     }
 
     initThreat() {
+        //todo need to centralise this as is duplicated else where
         return this.fb.group({
             // $key: [''],
             title: ['', [Validators.required]],
-            impact: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]],
-            probability: ['', [Validators.required, CustomValidators.number, CustomValidators.range([0.001, 1])]]
+            impact: ['', [Validators.required]],
+            probability: ['', [Validators.required]],
+            score: '-1'
         });
     }
 
@@ -86,6 +93,8 @@ export class ProjectFormComponent implements OnChanges {
     }
 
     emitSaveThreat(threat: FormGroup) {
+        //emitSaveThreat(threat: Threat) {
+        // this.handleAddThreat.emit(threat);
         this.threats.push(threat);
     }
 
