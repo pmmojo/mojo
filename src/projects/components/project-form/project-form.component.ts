@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormArray, FormGroup } from "@angular/forms";
 import { Project } from "../../models/project.interface";
 import { CustomValidators } from "ng2-validation";
 import { Threat } from "../../../threats/models/threat.interface";
+import { CumulativeSuccessService } from "../../../shared/services/cumulative-success-service/cumulative-success-service.service";
 
 @Component({
     selector: 'project-form',
@@ -79,7 +80,7 @@ export class ProjectFormComponent implements OnChanges {
     }
 
     createProject() {
-        if (this.form.valid) {
+        if (this.form.valid) {                        
             this.handleCreateProject.emit(this.form.value);
             this.form = this.initProject();
         }

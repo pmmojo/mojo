@@ -8,6 +8,10 @@ export enum Impact {
     NoImpact = 7
 }
 
+export function ImpactLabelByStringId(id: string): string {
+    return ImpactLabel(Number(id));
+}
+
 export function ImpactLabel(impact: Impact): string {
     switch (impact) {
         case Impact.Catastrophic:

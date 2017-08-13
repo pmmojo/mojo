@@ -63,12 +63,14 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   }
 
   handleCreateProject(project: Project) {
+    CumulativeSuccessService.setThreatsCumulativeSuccess(project.threats);
     this.store.dispatch(new projectActions.CreateProject(project));
 
     //listener set up to redirect
   }
 
   handleUpdateProject(project: Project) {
+    CumulativeSuccessService.setThreatsCumulativeSuccess(project.threats);
     this.store.dispatch(new projectActions.UpdateProject({ key: this.projectKey, project }));
 
     //listener set up to redirect

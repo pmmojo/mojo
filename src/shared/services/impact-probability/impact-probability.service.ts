@@ -9,14 +9,8 @@ export class ThreatScoreService {
         if (probability == Probability.Impossible) return 1;
         if (impact == Impact.NoImpact) return 1;
 
-        console.log('probability typeof', typeof probability);
-        console.log('impact typeof', typeof impact);
-        console.log('probability', probability);
-        console.log('impact', impact);
-
         switch (probability) {
-            case Probability.AlmostImpossible:
-            console.log('am AlmostImpossible');
+            case Probability.AlmostImpossible:            
                 switch (impact) {
                     case Impact.Catastrophic:
                         return 0.8;

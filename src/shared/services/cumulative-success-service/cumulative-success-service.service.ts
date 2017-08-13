@@ -5,21 +5,28 @@ import { Threat } from "../../../threats/models/threat.interface";
 @Injectable()
 export class CumulativeSuccessService {
     static setThreatsCumulativeSuccess(threats: Threat[]): Threat[] {
-        console.log('am in setThreatsCumulativeSuccess');
         if (threats === null || threats === undefined) return new Array<Threat>();
         if (threats.length === 0) return threats;
-        
-        threats.sort(function(a, b){
-            return b.score - a.score;
+
+        //we need to make sure firstly that the lowest threat score(least chance of success) is first in the list
+        threats.sort(function (a, b) {
+            return a.score - b.score;
         })
-        //todo sort threats by threat score with the lowest being first in the list
-        let cumulativeScore = 1;
 
-        //then loop through list
+        let cumulativeScore = 1;//we start at 100% chance of success
+
         for (let threat of threats) {
+            console.log('start of a threat')
+            console.log('cumulativeScore',cumulativeScore)
+            console.log('threat.score',threat.score)
+            const currentCumulativeScore = (cumulativeScore * threat.score);
+            console.log('(cumulativeScore * threat.score)',(cumulativeScore * threat.score))
             
+            threat.cumulativeSuccessPercent = (currentCumulativeScore * 100);
+            console.log('(currentCumulativeScore * 100)',(currentCumulativeScore * 100))
+            cumulativeScore = currentCumulativeScore;
         }
-
+        
         return threats;
     }
 

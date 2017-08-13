@@ -66,7 +66,7 @@ export class ProjectViewComponent implements OnInit {
 
               if (project.threats) {
                 for (let entry of project.threats) {
-                  results = [...results, { name: entry.title, value: entry.probability }];
+                  results = [...results, { name: entry.title, value: entry.cumulativeSuccessPercent, min:0, max:0 }];
                 }
               }
 

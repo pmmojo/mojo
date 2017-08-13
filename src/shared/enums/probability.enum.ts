@@ -7,6 +7,10 @@ export enum Probability {
     Impossible = 6,
 }
 
+export function ProbabilityLabelByStringId(id: string): string {
+    return ProbabilityLabel(Number(id));
+}
+
 export function ProbabilityLabel(probability: Probability): string {
     switch (probability) {
         case Probability.Certain:
@@ -25,3 +29,4 @@ export function ProbabilityLabel(probability: Probability): string {
             return "";
     }
 }
+

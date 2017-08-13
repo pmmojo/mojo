@@ -38,18 +38,8 @@ export class ThreatInputComponent implements OnInit {
         });
     }
 
-    saveThreat() {
-        //todo here we are in a position to set the threatScore before emitting        
-        let probability: Probability = Probability[<string>this.form.get('probability').value];
-        let impact: Impact = <Impact>this.form.get('impact').value;
-
-        console.log( probability);
-        console.log( impact);
-
-        console.log(typeof probability);
-        console.log(typeof impact);
-        
-        this.form.get('score').setValue(ThreatScoreService.getScore(probability, impact));
+    saveThreat() {        
+        this.form.get('score').setValue(ThreatScoreService.getScore(Number(this.form.get('probability').value), Number(this.form.get('impact').value)));
 
         this.handleSaveThreat.emit(this.form);
         this.form = this.initThreat();
