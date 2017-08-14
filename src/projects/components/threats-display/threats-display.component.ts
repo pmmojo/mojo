@@ -12,10 +12,10 @@ import { ImpactLabelByStringId } from "../../../shared/enums/impact.enum";
                 Threat
             </th>
             <th>
-                Impact
+                Probability
             </th>
             <th>
-                Probability
+            Impact
             </th>
             <th>
                 Score
@@ -27,10 +27,10 @@ import { ImpactLabelByStringId } from "../../../shared/enums/impact.enum";
                         {{threat.title}}
                     </td>
                     <td>                
-                        {{impactLabel(threat.impact)}}
+                        {{probabilityLabel(threat.probability)}}
                     </td>
                     <td>
-                        {{probabilityLabel(threat.probability)}}
+                        {{impactLabel(threat.impact)}}                        
                     </td>
                     <td>
                         {{threat.score}}
